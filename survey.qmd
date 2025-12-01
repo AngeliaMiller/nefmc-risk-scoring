@@ -1,0 +1,184 @@
+---
+# General Settings
+format: html
+echo: false
+warning: false
+
+# Theme Settings
+theme: 
+  - flatly
+barcolor: "#3e9eb6"
+barposition: top
+footer-left: "Made with [surveydown](https://surveydown.org)"
+footer-right: '[<i class="bi bi-github"></i> Source Code](https://github.com/surveydown-dev/template_default)'
+
+# Survey Settings
+use-cookies: false
+auto-scroll: false
+rate-survey: false
+system-language: en
+highlight-unanswered: true
+highlight-color: blue
+capture-metadata: true
+all-questions-required: false
+---
+
+```{r}
+library(surveydown)
+library(tidyverse)
+```
+
+--- Introduction
+
+# Risk Policy Scoring Form
+
+Scoring to be done by the PDT for the factors
+
+```{r report year}
+sd_question(
+  type = "textarea",
+  id = "report_year", 
+  label = "Reporting year", 
+  height = "10px",
+  placeholder = as.character(lubridate::year(lubridate::now()))
+)
+```
+
+```{r stock}
+sd_question("stock")
+```
+
+### Biomass and Stock Status - Current Productivity 
+Move the slider to select the factor score based on the rubric underneath.
+
+```{r}
+sd_question(
+  type = "slider_numeric",
+  id = "biomass",
+  label = " ",
+  option = seq(-4,4,2)
+)
+
+```
+
+![](images/stock-status-rubric.png){fig-alt="The biomass and stock status rubric" width=25%}
+
+### Recruitment - Future Productivity 
+Move the slider to select the factor score based on the rubric underneath.
+
+```{r}
+sd_question(
+  type = "slider_numeric",
+  id = "recruitment",
+  label = "",
+  option = seq(-4,4,2)
+)
+```
+
+![](images/recruitment-rubric.png){fig-alt="The recruitment rubric" width=25%}
+
+### Assessment Uncertainty 
+Move the slider to select the factor score based on the rubric underneath.
+
+```{r}
+sd_question(
+  type = "slider_numeric",
+  id = "assessment",
+  label = "",
+  option = seq(0,4,1)
+)
+```
+
+![](images/assessment-rubric.png){fig-alt="The assessment uncertainty rubric" width=25%}
+
+### Climate vulnerability
+Move the slider to select the factor score based on the rubric underneath.
+
+```{r}
+sd_question(
+  type = "slider_numeric",
+  id = "climate",
+  label = "",
+  option = seq(0,4,1)
+)
+```
+
+![](images/climate-rubric.png){fig-alt="The climate vulnerability rubric" width=25%}
+
+### Fish Condition
+Move the slider to select the factor score based on the rubric underneath.
+
+```{r}
+sd_question(
+  type = "slider_numeric",
+  id = "fish_condition",
+  label = "",
+  option = seq(0,4,1)
+)
+```
+
+![](images/fish-condition-rubric.png){fig-alt="The fish condition rubric" width=25%}
+
+```{r}
+sd_nav(show_previous = TRUE)
+```
+
+--- fisheries_page 
+
+### Commercial Fishery Characterization
+Answer the following questions and move the slider to select the factor score based on the rubric underneath:</br>
+  1. Is revenue concentrated in ports (look at top 3 ports by revenue) with low catch diversity? </br>
+  2. Is the market value decreasing (i.e. price per pound)? </br>
+  3. Does information from the most recent fishing year suggest any warning signs about the fishery? </br>
+</br>
+*Fishery specific questions:*</br>
+  - Scallops: Is landings per unit effort decreasing (LPUE)?</br>
+  - Groundfish: Are lease prices decreasing?</br>
+  - Monkfish: Is days-at-sea (DAS) usage decreasing?</br>
+</br>
+*If quota for this species is needed to catch another species, move one box to the left.*</br>
+
+```{r}
+sd_question(
+  type = "slider_numeric",
+  id = "commercial",
+  label = "Commercial Fishery Characterization",
+  option = seq(-4,4,2)
+)
+```
+
+![](images/commercial-rubric.png){fig-alt="The commercial fishery characterization rubric" width=25%}
+
+### Recreational Fishery Characterization
+Answer the following questions and move the slider to select the factor score based on the rubric underneath:</br>
+  1. Is recreational fishery diversity from the SOE report declining over the last five (5) years? </br>
+  2. Are the number of angler trips targeting the species declining over the last five (5) years? *Targeting means MRIP "target" or "secondary target"*</br>
+  3. Is the PSE for total catch greater than 30 in the last three (3) years?</br>
+  4. Has there been a change in the recreational regulations within the last twelve (12) months?</br>
+
+```{r}
+sd_question(
+  type = "slider_numeric",
+  id = "recreational",
+  label = "",
+  option = seq(-4,4,2)
+)
+```
+
+![](images/recreational-rubric.png){fig-alt="The recreational fishery characterization rubric" width=25%}
+
+```{r}
+sd_nav(show_previous = TRUE)
+```
+
+--- End
+
+## End
+
+This is the last page in the survey.
+
+```{r}
+sd_close()
+```
+
+
